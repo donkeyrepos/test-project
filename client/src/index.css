@@ -1,0 +1,420 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@700;900&display=swap');
+
+/* Root Variables - Cyberpunk/Neon Theme */
+:root {
+  --primary-color: #00ffff;
+  --secondary-color: #ff00ff;
+  --accent-color: #ffff00;
+  --dark-color: #0a0e27;
+  --light-color: #ffffff;
+  --bg-dark: #0f0f23;
+  --bg-darker: #1a1a2e;
+  --gradient-primary: linear-gradient(135deg, #00ffff 0%, #ff00ff 100%);
+  --gradient-cyan: linear-gradient(135deg, #00ffff 0%, #0080ff 100%);
+  --gradient-magenta: linear-gradient(135deg, #ff00ff 0%, #ff0080 100%);
+  --gradient-yellow: linear-gradient(135deg, #ffff00 0%, #ff8000 100%);
+  --shadow-cyan: 0 0 20px rgba(0, 255, 255, 0.3);
+  --shadow-magenta: 0 0 20px rgba(255, 0, 255, 0.3);
+  --shadow-yellow: 0 0 20px rgba(255, 255, 0, 0.3);
+  --border-radius: 15px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Global Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #0a0e27;
+  color: #ffffff;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: var(--dark-color);
+}
+
+/* Navbar Styles */
+.navbar {
+  background: white !important;
+  box-shadow: var(--shadow-sm);
+  padding: 1rem 0;
+  transition: var(--transition);
+}
+
+.navbar-brand {
+  font-family: 'Orbitron', 'Poppins', sans-serif;
+  font-weight: 900;
+  font-size: 1.8rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+  letter-spacing: 2px;
+}
+
+.nav-link {
+  font-weight: 500;
+  color: var(--dark-color) !important;
+  margin: 0 0.5rem;
+  transition: var(--transition);
+  position: relative;
+}
+
+.nav-link:hover {
+  color: var(--primary-color) !important;
+}
+
+/* Hero Section */
+.hero-section {
+  background: var(--gradient-ocean);
+  color: white;
+  padding: 120px 0 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 3rem;
+}
+
+.hero-section h1 {
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 1.5rem;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.hero-section p {
+  font-size: 1.4rem;
+  margin-bottom: 2.5rem;
+  opacity: 0.95;
+}
+
+.hero-section .btn {
+  margin: 0 0.5rem;
+  padding: 0.8rem 2rem;
+  font-weight: 600;
+  border-radius: 50px;
+  transition: var(--transition);
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--gradient-primary);
+  border: none;
+  color: #0a0e27;
+  font-weight: 700;
+  padding: 0.6rem 1.5rem;
+  border-radius: 50px;
+  transition: var(--transition);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+  background: var(--gradient-cyan);
+  color: #0a0e27;
+}
+
+.btn-custom {
+  border-radius: 50px;
+  padding: 10px 30px;
+  font-weight: 600;
+}
+
+/* Recipe Cards */
+.recipe-card {
+  transition: var(--transition);
+  height: 100%;
+  border: none;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  background: white;
+}
+
+.recipe-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+}
+
+.recipe-image {
+  height: 250px;
+  object-fit: cover;
+  width: 100%;
+  transition: var(--transition);
+}
+
+.recipe-card:hover .recipe-image {
+  transform: scale(1.1);
+}
+
+.min-vh-90 {
+  min-height: 90vh;
+}
+
+/* Forms */
+.form-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+}
+
+.form-control, .form-select {
+  border-radius: var(--border-radius);
+  border: 2px solid #e9ecef;
+  padding: 0.75rem 1rem;
+  transition: var(--transition);
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(255, 107, 107, 0.15);
+}
+
+.form-label {
+  font-weight: 600;
+  color: var(--dark-color);
+  margin-bottom: 0.5rem;
+}
+
+/* Recipe Detail */
+.recipe-detail-image {
+  max-height: 500px;
+  object-fit: cover;
+  width: 100%;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+}
+
+/* Badges */
+.badge {
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.badge-custom {
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+}
+
+.badge-primary {
+  background: var(--gradient-primary);
+  color: #0a0e27;
+  font-weight: 700;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+/* Cards */
+.card {
+  border: none;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 80px 0 60px;
+  }
+
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-section p {
+    font-size: 1.1rem;
+  }
+
+  .recipe-image {
+    height: 200px;
+  }
+
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+
+  .form-container {
+    padding: 1.5rem;
+  }
+}
+
+/* Additional Cyberpunk Theme Styles */
+.bg-cyberpunk {
+  background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 100%);
+}
+
+.text-primary {
+  color: var(--primary-color) !important;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.border-primary {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
+/* Scrollbar Cyberpunk Theme */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0e27;
+  border-left: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gradient-primary);
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gradient-cyan);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+}
+
+/* Loading Spinner */
+.spinner-border {
+  color: var(--primary-color);
+  filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.8));
+}
+
+/* Toast Notifications */
+.Toastify__toast {
+  border-radius: var(--border-radius);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  background: rgba(10, 14, 39, 0.95);
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+}
+
+/* Link Hover Effects */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--secondary-color);
+  text-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+/* Card Hover with Neon Glow */
+.card:hover {
+  box-shadow: 0 8px 32px rgba(0, 255, 255, 0.4);
+  transform: translateY(-5px);
+}
+
+/* Button Outline Cyberpunk */
+.btn-outline-primary {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background: transparent;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.btn-outline-primary:hover {
+  background: var(--gradient-primary);
+  border-color: transparent;
+  color: #0a0e27;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+}
+
+/* Neon Text Effect */
+.neon-text {
+  color: #00ffff;
+  text-shadow:
+    0 0 5px rgba(0, 255, 255, 0.5),
+    0 0 10px rgba(0, 255, 255, 0.5),
+    0 0 20px rgba(0, 255, 255, 0.5),
+    0 0 40px rgba(0, 255, 255, 0.3);
+}
+
+/* Glitch Effect */
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+/* Pulse Glow Animation */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(0, 255, 255, 0.6);
+  }
+}
+
+/* AI Assistant Input Placeholder */
+.ai-assistant-input::placeholder {
+  color: rgba(0, 255, 255, 0.7) !important;
+  opacity: 1 !important;
+}
+
+.ai-assistant-input::-webkit-input-placeholder {
+  color: rgba(0, 255, 255, 0.7) !important;
+  opacity: 1 !important;
+}
+
+.ai-assistant-input::-moz-placeholder {
+  color: rgba(0, 255, 255, 0.7) !important;
+  opacity: 1 !important;
+}
+
+.ai-assistant-input:-ms-input-placeholder {
+  color: rgba(0, 255, 255, 0.7) !important;
+  opacity: 1 !important;
+}
+
