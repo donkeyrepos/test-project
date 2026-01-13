@@ -61,7 +61,7 @@ const BrowseRecipes = () => {
                     {recipe.images && recipe.images.length > 0 ? (
                       <Card.Img 
                         variant="top" 
-                        src={`http://${process.env.PUBLIC_URL}:5000/${recipe.images[0]}`} 
+                        src={`http://localhost:5000/${recipe.images[0]}`} 
                         className="recipe-image"
                         alt={recipe.title}
                       />
