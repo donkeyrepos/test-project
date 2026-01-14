@@ -183,8 +183,8 @@ const RecipeDetail = () => {
         <Col lg={8}>
           {/* Recipe Image */}
           {recipe.images && recipe.images.length > 0 ? (
-            <img 
-              src={`http://localhost:5000/${recipe.images[0]}`} 
+            <img
+              src={`${process.env.REACT_APP_API_URL}/${recipe.images[0]}`}
               alt={recipe.title}
               className="recipe-detail-image mb-4 w-100"
             />
@@ -567,7 +567,7 @@ const RecipeDetail = () => {
                   {recipe.images.slice(1).map((image, index) => (
                     <Col xs={6} key={index} className="mb-2">
                       <img
-                        src={`http://localhost:5000/${image}`}
+                        src={`${process.env.REACT_APP_API_URL}/${image}`}
                         alt={`${recipe.title} ${index + 2}`}
                         className="img-fluid rounded"
                       />

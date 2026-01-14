@@ -116,9 +116,9 @@ const RecipeList = () => {
                 <Col key={recipe._id} xs={12} sm={6} md={4} lg={3} className="mb-4">
                   <Card className="recipe-card h-100">
                     {recipe.images && recipe.images.length > 0 ? (
-                      <Card.Img 
-                        variant="top" 
-                        src={`http://localhost:5000/${recipe.images[0]}`} 
+                      <Card.Img
+                        variant="top"
+                        src={`${process.env.REACT_APP_API_URL}/${recipe.images[0]}`}
                         className="recipe-image"
                         alt={recipe.title}
                       />

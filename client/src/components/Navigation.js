@@ -50,7 +50,7 @@ const Navigation = () => {
                 color: '#00ffff',
                 fontWeight: '600',
                 transition: 'all 0.3s ease',
-                fontSize: '0.95rem',
+                fontSize: '1.15rem',
                 padding: '0.5rem 0.75rem'
               }}
             >
@@ -63,7 +63,7 @@ const Navigation = () => {
                 color: '#00ffff',
                 fontWeight: '600',
                 transition: 'all 0.3s ease',
-                fontSize: '0.95rem',
+                fontSize: '1.15rem',
                 padding: '0.5rem 0.75rem'
               }}
             >
@@ -78,7 +78,7 @@ const Navigation = () => {
                     color: '#ff00ff',
                     fontWeight: '600',
                     transition: 'all 0.3s ease',
-                    fontSize: '0.95rem',
+                    fontSize: '1.15rem',
                     padding: '0.5rem 0.75rem'
                   }}
                 >
@@ -91,7 +91,7 @@ const Navigation = () => {
                     color: '#ff00ff',
                     fontWeight: '600',
                     transition: 'all 0.3s ease',
-                    fontSize: '0.95rem',
+                    fontSize: '1.15rem',
                     padding: '0.5rem 0.75rem'
                   }}
                 >
@@ -104,7 +104,7 @@ const Navigation = () => {
                     color: '#00ff00',
                     fontWeight: '600',
                     transition: 'all 0.3s ease',
-                    fontSize: '0.95rem',
+                    fontSize: '1.15rem',
                     padding: '0.5rem 0.75rem'
                   }}
                 >
@@ -120,7 +120,7 @@ const Navigation = () => {
                   color: '#ffff00',
                   fontWeight: '600',
                   transition: 'all 0.3s ease',
-                  fontSize: '0.95rem',
+                  fontSize: '1.15rem',
                   padding: '0.5rem 0.75rem'
                 }}
               >

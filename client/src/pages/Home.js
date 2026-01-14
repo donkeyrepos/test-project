@@ -8,7 +8,7 @@ const Home = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'COOKit | Recipe Directory';
+    document.title = 'COOKit | Συνταγές Μαγειρικής/Cooking Recipes';
   }, []);
 
   useEffect(() => {
@@ -249,7 +249,7 @@ const Home = () => {
                       {recipe.images && recipe.images.length > 0 ? (
                         <div style={{position: 'relative', height: '200px', overflow: 'hidden'}}>
                           <img
-                            src={`http://localhost:5000/${recipe.images[0]}`}
+                            src={`${process.env.REACT_APP_API_URL}/${recipe.images[0]}`}
                             alt={recipe.title}
                             style={{
                               width: '100%',
