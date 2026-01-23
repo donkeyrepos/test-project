@@ -2,13 +2,11 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-// Create uploads directory if it doesn't exist
 const uploadDir = './uploads';
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir, { recursive: true });
 }
 
-// Configure storage
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, uploadDir);
@@ -19,7 +17,6 @@ const storage = multer.diskStorage({
   }
 });
 
-// File filter for images
 const imageFilter = (req, file, cb) => {
   const allowedTypes = /jpeg|jpg|png|gif|webp/;
   const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
@@ -32,7 +29,6 @@ const imageFilter = (req, file, cb) => {
   }
 };
 
-// File filter for attachments
 const attachmentFilter = (req, file, cb) => {
   const allowedTypes = /pdf|doc|docx|txt/;
   const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
@@ -44,21 +40,18 @@ const attachmentFilter = (req, file, cb) => {
   }
 };
 
-// Upload middleware for images
 exports.uploadImages = multer({
   storage: storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+  limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: imageFilter
-}).array('images', 5); // Max 5 images
+}).array('images', 5);
 
-// Upload middleware for attachments
 exports.uploadAttachments = multer({
   storage: storage,
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
+  limits: { fileSize: 10 * 1024 * 1024 },
   fileFilter: attachmentFilter
-}).array('attachments', 3); // Max 3 attachments
+}).array('attachments', 3);
 
-// Combined upload middleware
 exports.uploadFiles = multer({
   storage: storage,
   limits: { fileSize: 10 * 1024 * 1024 }

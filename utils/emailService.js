@@ -1,34 +1,28 @@
 const nodemailer = require('nodemailer');
 
-// Create reusable transporter
 const createTransporter = () => {
-  // For development, use a test account or configure with your email service
-  // For production, use environment variables for email credentials
   
   if (process.env.EMAIL_SERVICE === 'gmail') {
     return nodemailer.createTransport({
       service: 'gmail',
       auth: {
         user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD // Use App Password for Gmail
+        pass: process.env.EMAIL_PASSWORD
       }
     });
   } else {
-    // For development/testing - creates a test account
-    // In production, replace this with actual email service
     console.log('⚠️  Email service not configured. Using ethereal test account.');
     console.log('⚠️  Set EMAIL_SERVICE, EMAIL_USER, and EMAIL_PASSWORD in .env for production.');
     return null;
   }
 };
 
-// Send verification email
 exports.sendVerificationEmail = async (email, username, verificationToken) => {
   try {
     const transporter = createTransporter();
     
     if (!transporter) {
-      // For development without email configured
+
       const verificationUrl = `${process.env.CLIENT_URL || 'http://localhost:3000'}/verify-email/${verificationToken}`;
       console.log('\n📧 ===== EMAIL VERIFICATION =====');
       console.log(`To: ${email}`);
@@ -94,7 +88,6 @@ exports.sendVerificationEmail = async (email, username, verificationToken) => {
   }
 };
 
-// Send welcome email after verification
 exports.sendWelcomeEmail = async (email, username) => {
   try {
     const transporter = createTransporter();

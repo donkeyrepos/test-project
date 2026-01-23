@@ -4,9 +4,6 @@ const User = require('../models/User');
 const Recipe = require('../models/Recipe');
 const { protect, admin } = require('../middleware/auth');
 
-// @route   GET /api/users
-// @desc    Get all users (Admin only)
-// @access  Private/Admin
 router.get('/', protect, admin, async (req, res) => {
   try {
     const users = await User.find().select('-password').sort({ createdAt: -1 });
@@ -17,9 +14,6 @@ router.get('/', protect, admin, async (req, res) => {
   }
 });
 
-// @route   GET /api/users/:id
-// @desc    Get user by ID
-// @access  Public
 router.get('/:id', async (req, res) => {
   try {
     const user = await User.findById(req.params.id).select('-password');
@@ -28,7 +22,6 @@ router.get('/:id', async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
     
-    // Get user's recipe count
     const recipeCount = await Recipe.countDocuments({ author: req.params.id });
     
     res.json({
@@ -44,9 +37,6 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// @route   PUT /api/users/:id/role
-// @desc    Update user role (Admin only)
-// @access  Private/Admin
 router.put('/:id/role', protect, admin, async (req, res) => {
   try {
     const { role } = req.body;
@@ -71,9 +61,6 @@ router.put('/:id/role', protect, admin, async (req, res) => {
   }
 });
 
-// @route   DELETE /api/users/:id
-// @desc    Delete user (Admin only)
-// @access  Private/Admin
 router.delete('/:id', protect, admin, async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -82,7 +69,6 @@ router.delete('/:id', protect, admin, async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
     
-    // Delete all recipes by this user
     await Recipe.deleteMany({ author: req.params.id });
     
     await user.deleteOne();

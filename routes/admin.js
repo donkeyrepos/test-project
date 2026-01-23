@@ -7,12 +7,8 @@ const Recipe = require('../models/Recipe');
 const { protect, admin } = require('../middleware/auth');
 const { sendVerificationEmail } = require('../utils/emailService');
 
-// All routes require authentication and admin role
 router.use(protect, admin);
 
-// @route   GET /api/admin/users
-// @desc    Get all users
-// @access  Private/Admin
 router.get('/users', async (req, res) => {
   try {
     const users = await User.find().select('-password').sort({ createdAt: -1 });
@@ -26,9 +22,6 @@ router.get('/users', async (req, res) => {
   }
 });
 
-// @route   GET /api/admin/users/:id
-// @desc    Get user by ID
-// @access  Private/Admin
 router.get('/users/:id', async (req, res) => {
   try {
     const user = await User.findById(req.params.id).select('-password');
@@ -42,9 +35,6 @@ router.get('/users/:id', async (req, res) => {
   }
 });
 
-// @route   POST /api/admin/users
-// @desc    Create a new user (admin)
-// @access  Private/Admin
 router.post('/users', [
   body('username').trim().isLength({ min: 3 }).withMessage('Username must be at least 3 characters'),
   body('email').isEmail().withMessage('Please enter a valid email'),
@@ -59,20 +49,17 @@ router.post('/users', [
   try {
     const { username, email, password, role, isVerified } = req.body;
 
-    // Check if user already exists
     const userExists = await User.findOne({ $or: [{ email }, { username }] });
     if (userExists) {
       return res.status(400).json({ message: 'User already exists with this email or username' });
     }
 
-    // Generate verification token if not verified
     let verificationToken, verificationTokenExpires;
     if (!isVerified) {
       verificationToken = crypto.randomBytes(32).toString('hex');
       verificationTokenExpires = Date.now() + 24 * 60 * 60 * 1000; // 24 hours
     }
 
-    // Create user
     const user = await User.create({
       username,
       email,
@@ -83,7 +70,6 @@ router.post('/users', [
       verificationTokenExpires
     });
 
-    // Send verification email if not verified
     if (!isVerified) {
       await sendVerificationEmail(email, username, verificationToken);
     }
@@ -105,9 +91,6 @@ router.post('/users', [
   }
 });
 
-// @route   PUT /api/admin/users/:id
-// @desc    Update user (admin)
-// @access  Private/Admin
 router.put('/users/:id', async (req, res) => {
   try {
     const { username, email, role, isVerified } = req.body;
@@ -117,7 +100,6 @@ router.put('/users/:id', async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    // Update fields
     if (username) user.username = username;
     if (email) user.email = email;
     if (role) user.role = role;
@@ -142,9 +124,6 @@ router.put('/users/:id', async (req, res) => {
   }
 });
 
-// @route   DELETE /api/admin/users/:id
-// @desc    Delete user (admin)
-// @access  Private/Admin
 router.delete('/users/:id', async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
@@ -152,15 +131,12 @@ router.delete('/users/:id', async (req, res) => {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    // Prevent admin from deleting themselves
     if (user._id.toString() === req.user._id.toString()) {
       return res.status(400).json({ message: 'You cannot delete your own account' });
     }
 
-    // Delete all recipes by this user
     await Recipe.deleteMany({ user: user._id });
 
-    // Delete user
     await User.findByIdAndDelete(req.params.id);
 
     res.json({ message: 'User and their recipes deleted successfully' });
@@ -170,9 +146,6 @@ router.delete('/users/:id', async (req, res) => {
   }
 });
 
-// @route   GET /api/admin/recipes
-// @desc    Get all recipes (admin can see all)
-// @access  Private/Admin
 router.get('/recipes', async (req, res) => {
   try {
     const recipes = await Recipe.find()
@@ -189,9 +162,6 @@ router.get('/recipes', async (req, res) => {
   }
 });
 
-// @route   PUT /api/admin/recipes/:id
-// @desc    Update any recipe (admin)
-// @access  Private/Admin
 router.put('/recipes/:id', async (req, res) => {
   try {
     const recipe = await Recipe.findById(req.params.id);
@@ -199,7 +169,6 @@ router.put('/recipes/:id', async (req, res) => {
       return res.status(404).json({ message: 'Recipe not found' });
     }
 
-    // Update recipe fields
     const allowedFields = ['title', 'description', 'ingredients', 'instructions', 'category', 'difficulty', 'prepTime', 'cookTime', 'servings'];
     allowedFields.forEach(field => {
       if (req.body[field] !== undefined) {
@@ -219,9 +188,6 @@ router.put('/recipes/:id', async (req, res) => {
   }
 });
 
-// @route   DELETE /api/admin/recipes/:id
-// @desc    Delete any recipe (admin)
-// @access  Private/Admin
 router.delete('/recipes/:id', async (req, res) => {
   try {
     const recipe = await Recipe.findById(req.params.id);
@@ -238,9 +204,6 @@ router.delete('/recipes/:id', async (req, res) => {
   }
 });
 
-// @route   GET /api/admin/stats
-// @desc    Get platform statistics
-// @access  Private/Admin
 router.get('/stats', async (req, res) => {
   try {
     const totalUsers = await User.countDocuments();
@@ -248,13 +211,11 @@ router.get('/stats', async (req, res) => {
     const adminUsers = await User.countDocuments({ role: 'admin' });
     const totalRecipes = await Recipe.countDocuments();
 
-    // Get recent users
     const recentUsers = await User.find()
       .select('-password')
       .sort({ createdAt: -1 })
       .limit(5);
 
-    // Get recent recipes
     const recentRecipes = await Recipe.find()
       .populate('author', 'username email')
       .sort({ createdAt: -1 })

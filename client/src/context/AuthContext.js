@@ -17,7 +17,6 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Check if user is logged in
     const token = localStorage.getItem('token');
     const userData = localStorage.getItem('user');
     
@@ -45,7 +44,6 @@ export const AuthProvider = ({ children }) => {
 
       setUser(userData);
 
-      // Show email verification message
       if (message) {
         toast.info(message, { autoClose: 5000 });
       } else {

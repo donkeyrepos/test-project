@@ -1,7 +1,7 @@
 {
-  "name": "recipe-directory",
+  "name": "cookit",
   "version": "1.0.0",
-  "description": "A full-stack recipe directory website",
+  "description": "Συνταγές Μαγειρικής/Cooking Recipes",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
